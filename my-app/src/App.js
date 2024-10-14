@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './MyComponents/Header';
 import Todos from './MyComponents/Todos';
+import AddTodo from './MyComponents/AddTodo';
 import Footer from './MyComponents/Footer'
 import { useState } from 'react';
 
@@ -18,6 +19,22 @@ function App() {
 
     ));
 
+  }
+
+  const addTodo=(task,desc)=>{
+      console.log("addiing this todo", task,desc)
+      let sno;
+      if(todolist.length===0){ sno=1}
+      else{
+         sno= todolist[todolist.length-1].sno + 1;
+      }
+      const myTodo={
+        sno :sno,
+        task: task,
+        desc : desc
+      }
+      setTodolist ([...todolist,myTodo]);
+      console.log(myTodo);
   }
 
   const[todolist, setTodolist]= useState(
@@ -44,7 +61,9 @@ function App() {
 
   return (
     <>
+      
       <Header title ="My Todos List"/>
+      <AddTodo addTodo={addTodo}/>
       <Todos todos={todolist} onDelete={onDelete}/>
       <Footer/>{/*  {Footer()} */}
     </>
