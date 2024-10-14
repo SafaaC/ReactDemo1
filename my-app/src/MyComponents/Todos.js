@@ -3,7 +3,7 @@ import Todo from '../MyComponents/Todo'
 const Todos = (props) => {
   return (
     <div className='container'>
-      <h4 className='text-center my-4'>Todo List</h4>
+      <h4 className=' my-4'>Todo List</h4>
       
 
         {props.todos.length === 0? "No Todos to Display" :
