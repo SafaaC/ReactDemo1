@@ -11,7 +11,12 @@ const AddTodo = ({addTodo}) => {
             if(!task ||!desc){
                 alert("Task or Description can nor be blank");
             }
-            addTodo(task,desc)
+            else{
+                addTodo(task,desc);
+                setDesc('');
+                setTask('');
+            }
+            
 
     }
     return (

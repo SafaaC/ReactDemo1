@@ -4,10 +4,18 @@ import Header from './MyComponents/Header';
 import Todos from './MyComponents/Todos';
 import AddTodo from './MyComponents/AddTodo';
 import Footer from './MyComponents/Footer'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 function App() {
-
+  let initTodo;
+  
+  if(localStorage.getItem("todolist") === null){
+    initTodo=[];
+    
+  }
+  else{
+    initTodo = JSON.parse(localStorage.getItem("todolist"));
+  }
   const onDelete =(todo) =>{
     console.log("I'm On delete of todo",todo);
     // Deleting data this way does not work
@@ -16,15 +24,18 @@ function App() {
     setTodolist (todolist.filter((todoItem)=>{
         return todoItem!==todo;
     }
-
+    
     ));
+    localStorage.setItem("todolist",JSON.stringify(todolist));
 
   }
 
   const addTodo=(task,desc)=>{
       console.log("addiing this todo", task,desc)
       let sno;
-      if(todolist.length===0){ sno=1}
+      if(todolist.length === 0){ 
+        sno =0;
+      }
       else{
          sno= todolist[todolist.length-1].sno + 1;
       }
@@ -37,28 +48,10 @@ function App() {
       console.log(myTodo);
   }
 
-  const[todolist, setTodolist]= useState(
-    [
-      {
-        sno: 1,
-        task: "Excercise" ,
-        desc:"Do basic wor outs"
-      },
-      {
-        sno: 2,
-        task: "Course",
-        desc: "Do the online course of React"
-      },
-      {
-        sno: 3,
-        task: "Language",
-        desc: "Improve the English Language and learn new language"
-      },
-  
-    ]
-
-  );
-
+  const[todolist, setTodolist]= useState(initTodo);
+  useEffect(()=>{
+    localStorage.setItem("todolist",JSON.stringify(todolist));
+  },[todolist])
   return (
     <>
       
