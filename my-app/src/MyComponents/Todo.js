@@ -6,6 +6,7 @@ const Todo = (props) => {
         
         <h6>{props.todo.task}</h6>
         <p>{props.todo.desc}</p>
+
         <button className='btn btn-sm btn-danger' onClick={()=>{props.onDelete(props.todo)}}>Delete</button>
 
 
@@ -13,4 +14,4 @@ const Todo = (props) => {
   )
 }
 
-export default Todo
+export default Todo;
